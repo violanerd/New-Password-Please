@@ -3,6 +3,13 @@
 //an empty object to be added to
 var passwordInfo = {
 }
+//Password information
+var passList = [];
+var upperList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; 
+var lowerList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var specialList = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ";", "?"];
+var numList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 //functions to add to the passswordInfo object
 var passwordLength = function () { 
   var num = window.prompt("How long would you like your password to be? Anywhere from 8 to 128 characters.");
@@ -16,65 +23,91 @@ var passwordLength = function () {
   return num;
 } 
 
+// functions to get which characters to add to the password
 var passwordUpper = function () {
   var upper = window.confirm("Would you like to use uppercase letters?");
   if (upper) {
     window.alert("Great, your password will have uppercase letters.");
-    return upper;
+    passwordInfo.upper = true;
+    passList.concat(upperList);
   } else {
     window.alert("Ok, no uppercase.");
-    return false;
+    passwordInfo.upper = false;
   }
 }
 var passwordLower = function () {
   var lower = window.confirm("Would you like to use lowercase letters?");
   if (lower) {
     window.alert("Great, your password will have lowercase letters.");
-    return lower;
+    passwordInfo.lower = true;
+    passList.concat(lowerList);
   } else {
     window.alert("Ok, no lowercase.");
-    return false;
+    passwordInfo.lower = false;
   }
 }
 var passwordNumeric = function () {
   var numeric = window.confirm("Would you like to use numeric characters?");
   if (numeric) {
     window.alert("Great, your password will have numbers.");
-    return numeric;
+    passwordInfo.numeric = true;
+    passList.concat(numList);
   } else {
     window.alert("Ok, no numbers.");
-    return false;
+    passwordInfo.numeric = false;
   }
 }
 var passwordSpecial = function () {
   var special = window.confirm("Would you like to use special characters?");
   if (special) {
     window.alert("Great, your password will have special characters.");
-    return special;
-  } else if (passwordInfo.upper === false && passwordInfo.lower === false && passwordInfo.numeric === false) {
-    window.alert("You must pick at least one character: upper, lower, numeric or special.");
-    passwordUpper(); //this should be a function that redoes them, look at gladiator robots
+    passwordInfo.special = true;
+    passList.concat(specialList);
   } else {
     window.alert("Ok, no special characters.");
-    return false;
+    passwordInfo.special = false;
   }
 }
 
-// Will have to wrap the characters in a function, won't continually call down the list.
-// ??How to store the variable?
+// function to check if at least one character is selected
+var pickCharacters = function () {
+  passwordUpper();
+  passwordLower();
+  passwordNumeric();
+  passwordSpecial();
+  if (passwordInfo.upper === false && passwordInfo.lower === false && passwordInfo.numeric === false && passwordInfo.special === false) {
+    window.alert("You must pick at least one character: upper, lower, numeric or special.");
+    pickCharacters();
+  }
+  else {
+    window.alert("Let's generate that password!");
+  }
+}  
+  
 
+// random number generator
+var randomNumber = function(list) {
+  var value = Math.floor(Math.random() * (passList.length) + 1);
+  console.log(value);
+  return value;
+};
 
-
+//how to know when the password is long enough?
+// change password array to string
 
 //generate the password
 function generatePassword () {
   passwordInfo.length = passwordLength();
-  passwordInfo.upper = passwordUpper();
-  passwordInfo.lower = passwordLower();
-  passwordInfo.numeric = passwordNumeric();
-  passwordInfo.special = passwordSpecial(); 
+  pickCharacters (); //adds the character choices to the passwordInfo logic
   console.log(passwordInfo);
+  //for (i=0; i < passwordInfo.length - 1; i++) {
+  //  var a = passList[randomNumber(passList)];
+  //  var passCreate = [];
+  //  passCreate.push(a); 
+  //}
+  return passList.length;
 }
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
