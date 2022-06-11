@@ -16,8 +16,7 @@ var passwordLength = function () {
   if (num < 8 || num > 128) {
     window.alert("Please choose an appropriate length password");
     generatePassword();
-  } 
-  else {
+  } else {
     window.alert("Great! Your password will be " + num + " characters long. Let's pick characters to add to your password.");
   } 
   return num;
@@ -91,19 +90,20 @@ var randomNumber = function(list) {
   return value;
 };
 
-//how to know when the password is long enough?
-// change password array to string
+//how to get random chars for the length of the password??? 
 
 //generate the password
 function generatePassword () {
   passwordInfo.length = passwordLength();
-  pickCharacters (); //adds the character choices to the passwordInfo logic
+  pickCharacters (); //adds the character choices to the passwordInfo object
   console.log(passwordInfo);
-  //for (i=0; i < passwordInfo.length - 1; i++) {
-  //  var a = passList[randomNumber(passList)];
-  //  var passCreate = [];
-  //  passCreate.push(a); 
-  //}
+  console.log(passList.length);
+  console.log(passwordInfo.length)
+  while (passList.length < passwordInfo.length) {
+    if (passwordInfo.upper === true){
+      passList += (upperList[randomNumber(upperList)]);
+    }
+  }
   return passList;
 }
 
