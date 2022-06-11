@@ -4,7 +4,7 @@
 var passwordInfo = {
 }
 //Password information
-var passList = [];
+var passList = '';
 var upperList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; 
 var lowerList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var specialList = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ";", "?"];
@@ -29,7 +29,7 @@ var passwordUpper = function () {
   if (upper) {
     window.alert("Great, your password will have uppercase letters.");
     passwordInfo.upper = true;
-    passList.concat(upperList);
+    passList += (upperList[randomNumber(upperList)]);
   } else {
     window.alert("Ok, no uppercase.");
     passwordInfo.upper = false;
@@ -40,7 +40,7 @@ var passwordLower = function () {
   if (lower) {
     window.alert("Great, your password will have lowercase letters.");
     passwordInfo.lower = true;
-    passList.concat(lowerList);
+    passList += (lowerList[randomNumber(lowerList)]);
   } else {
     window.alert("Ok, no lowercase.");
     passwordInfo.lower = false;
@@ -51,7 +51,7 @@ var passwordNumeric = function () {
   if (numeric) {
     window.alert("Great, your password will have numbers.");
     passwordInfo.numeric = true;
-    passList.concat(numList);
+    passList += (numList[randomNumber(numList)]);
   } else {
     window.alert("Ok, no numbers.");
     passwordInfo.numeric = false;
@@ -62,7 +62,7 @@ var passwordSpecial = function () {
   if (special) {
     window.alert("Great, your password will have special characters.");
     passwordInfo.special = true;
-    passList.concat(specialList);
+    passList += (specialList[randomNumber(specialList)]);
   } else {
     window.alert("Ok, no special characters.");
     passwordInfo.special = false;
@@ -87,8 +87,7 @@ var pickCharacters = function () {
 
 // random number generator
 var randomNumber = function(list) {
-  var value = Math.floor(Math.random() * (passList.length) + 1);
-  console.log(value);
+  var value = Math.floor(Math.random() * (list.length) + 1);
   return value;
 };
 
@@ -105,7 +104,7 @@ function generatePassword () {
   //  var passCreate = [];
   //  passCreate.push(a); 
   //}
-  return passList.length;
+  return passList;
 }
 
 
