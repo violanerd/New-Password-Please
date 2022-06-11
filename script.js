@@ -2,15 +2,21 @@
 
 //an empty object to be added to
 var passwordInfo = {
+  // password length
+  // password character preferences 
 }
-//Password information
+
+// Variable to hold string to create password from
 var passList = '';
+// Arrays to create Password
 var upperList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; 
 var lowerList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var specialList = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ";", "?"];
 var numList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-//functions to add to the passswordInfo object
+//FUNCTIONS TO ADD TO THE PASSWORDINFO OBJECT
+
+// function to get passwordinfo length
 var passwordLength = function () { 
   var num = window.prompt("How long would you like your password to be? Anywhere from 8 to 128 characters.");
   if (num < 8 || num > 128) {
@@ -76,7 +82,7 @@ var passwordSpecial = function () {
   }
 }
 
-// function to check if at least one character is selected
+// function to check if at least one character preference is selected
 var pickCharacters = function () {
   passwordUpper();
   passwordLower();
@@ -91,7 +97,6 @@ var pickCharacters = function () {
   }
 }  
   
-
 // random number generator
 var randomNumber = function(list) {
   var value = Math.floor(Math.random() * (list.length));
@@ -100,14 +105,14 @@ var randomNumber = function(list) {
 
 //generate the password
 function generatePassword () {
-  passwordInfo.length = passwordLength();
-  pickCharacters (); //adds the character choices to the passwordInfo object
-  //generates the passList
-  var passDone = "";
+  passwordInfo.length = passwordLength(); // gets the password length
+  pickCharacters (); //adds the character choices to the passwordInfo object && generates the passList
+  var passDone = ""; //holds the password
+  // randomly select from passList string to generate password
   for (var i = 0; i < passwordInfo.length; i++) {
     passDone += passList.charAt(Math.floor(Math.random() * passList.length));
   }
-  passList = "";
+  passList = ""; // clear the string
   return passDone;
 }
 
