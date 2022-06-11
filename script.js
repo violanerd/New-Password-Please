@@ -28,7 +28,9 @@ var passwordUpper = function () {
   if (upper) {
     window.alert("Great, your password will have uppercase letters.");
     passwordInfo.upper = true;
-    passList += (upperList[randomNumber(upperList)]);
+    for (var i=0; i < passwordInfo.length; i++) (
+      passList += (upperList[randomNumber(upperList)])
+    )
   } else {
     window.alert("Ok, no uppercase.");
     passwordInfo.upper = false;
@@ -39,7 +41,9 @@ var passwordLower = function () {
   if (lower) {
     window.alert("Great, your password will have lowercase letters.");
     passwordInfo.lower = true;
-    passList += (lowerList[randomNumber(lowerList)]);
+    for (var i=0; i < passwordInfo.length; i++) (
+      passList += (lowerList[randomNumber(lowerList)])
+    )
   } else {
     window.alert("Ok, no lowercase.");
     passwordInfo.lower = false;
@@ -50,7 +54,9 @@ var passwordNumeric = function () {
   if (numeric) {
     window.alert("Great, your password will have numbers.");
     passwordInfo.numeric = true;
-    passList += (numList[randomNumber(numList)]);
+    for (var i=0; i < passwordInfo.length; i++) (
+      passList += (numList[randomNumber(numList)])
+    )
   } else {
     window.alert("Ok, no numbers.");
     passwordInfo.numeric = false;
@@ -61,7 +67,9 @@ var passwordSpecial = function () {
   if (special) {
     window.alert("Great, your password will have special characters.");
     passwordInfo.special = true;
-    passList += (specialList[randomNumber(specialList)]);
+    for (var i=0; i < passwordInfo.length; i++) (
+      passList += (specialList[randomNumber(specialList)])
+    )
   } else {
     window.alert("Ok, no special characters.");
     passwordInfo.special = false;
@@ -86,25 +94,21 @@ var pickCharacters = function () {
 
 // random number generator
 var randomNumber = function(list) {
-  var value = Math.floor(Math.random() * (list.length) + 1);
+  var value = Math.floor(Math.random() * (list.length));
   return value;
 };
-
-//how to get random chars for the length of the password??? 
 
 //generate the password
 function generatePassword () {
   passwordInfo.length = passwordLength();
   pickCharacters (); //adds the character choices to the passwordInfo object
-  console.log(passwordInfo);
-  console.log(passList.length);
-  console.log(passwordInfo.length)
-  while (passList.length < passwordInfo.length) {
-    if (passwordInfo.upper === true){
-      passList += (upperList[randomNumber(upperList)]);
-    }
+  //generates the passList
+  var passDone = "";
+  for (var i = 0; i < passwordInfo.length; i++) {
+    passDone += passList.charAt(Math.floor(Math.random() * passList.length));
   }
-  return passList;
+  passList = "";
+  return passDone;
 }
 
 
