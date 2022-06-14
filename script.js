@@ -2,8 +2,8 @@
 
 //an empty object to be added to
 var passwordInfo = {
-  // password length
-  // password character preferences 
+  // will add password length
+  // will add password character preferences 
 }
 
 // Variable to hold string to create password from
@@ -33,52 +33,52 @@ var passwordLength = function () {
 var passwordUpper = function () {
   var upper = window.confirm("Would you like to use uppercase letters?");
   if (upper) {
-    window.alert("Great, your password will have uppercase letters.");
+    alert("Great, your password will have uppercase letters.");
     passwordInfo.upper = true;
     for (var i=0; i < passwordInfo.length; i++) (
       passList += (upperList[randomNumber(upperList)])
     )
   } else {
-    window.alert("Ok, no uppercase.");
+    alert("Ok, no uppercase.");
     passwordInfo.upper = false;
   }
 }
 var passwordLower = function () {
   var lower = window.confirm("Would you like to use lowercase letters?");
   if (lower) {
-    window.alert("Great, your password will have lowercase letters.");
+    alert("Great, your password will have lowercase letters.");
     passwordInfo.lower = true;
     for (var i=0; i < passwordInfo.length; i++) (
       passList += (lowerList[randomNumber(lowerList)])
     )
   } else {
-    window.alert("Ok, no lowercase.");
+    alert("Ok, no lowercase.");
     passwordInfo.lower = false;
   }
 }
 var passwordNumeric = function () {
   var numeric = window.confirm("Would you like to use numeric characters?");
   if (numeric) {
-    window.alert("Great, your password will have numbers.");
+    alert("Great, your password will have numbers.");
     passwordInfo.numeric = true;
     for (var i=0; i < passwordInfo.length; i++) (
       passList += (numList[randomNumber(numList)])
     )
   } else {
-    window.alert("Ok, no numbers.");
+    alert("Ok, no numbers.");
     passwordInfo.numeric = false;
   }
 }
 var passwordSpecial = function () {
   var special = window.confirm("Would you like to use special characters?");
   if (special) {
-    window.alert("Great, your password will have special characters.");
+    alert("Great, your password will have special characters.");
     passwordInfo.special = true;
     for (var i=0; i < passwordInfo.length; i++) (
       passList += (specialList[randomNumber(specialList)])
     )
   } else {
-    window.alert("Ok, no special characters.");
+    alert("Ok, no special characters.");
     passwordInfo.special = false;
   }
 }
@@ -90,7 +90,7 @@ var pickCharacters = function () {
   passwordNumeric();
   passwordSpecial();
   if (passwordInfo.upper === false && passwordInfo.lower === false && passwordInfo.numeric === false && passwordInfo.special === false) {
-    window.alert("You must pick at least one character: upper, lower, numeric or special.");
+    alert("You must pick at least one character: upper, lower, numeric or special.");
     pickCharacters();
   }
   else {
@@ -109,11 +109,24 @@ function generatePassword () {
   passwordInfo.length = passwordLength(); // gets the password length
   pickCharacters (); //adds the character choices to the passwordInfo object && generates the passList
   var passDone = ""; //holds the password
-  // randomly select from passList string to generate password
-  for (var i = 0; i < passwordInfo.length; i++) {
-    passDone += passList.charAt(Math.floor(Math.random() * passList.length));
+
+  // Randomly select from passList to generate password
+  
+  // Variables to hold half of passList to increase randomness
+  var firstHalfPassList = passList.slice(0, passList.length/2);
+  var secondHalfPassList = passList.slice(passList.length/2, passList.length -1);
+  
+  var random = true; // variable to switch between halves of passList
+  for (var i = 0; i < passwordInfo.length; i++) { //loop through list to get the password!
+    if (random) {
+      passDone += firstHalfPassList.charAt(Math.floor(Math.random() * firstHalfPassList.length));
+      random = false;
+    } else {
+      passDone += secondHalfPassList.charAt(Math.floor(Math.random() * secondHalfPassList.length));
+      random = true;
+    }
   }
-  passList = ""; // clear the string
+  passList = ""; // clear the string to generate a new password if desired
   return passDone;
 }
 
