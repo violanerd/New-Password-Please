@@ -19,11 +19,12 @@ var numList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 // function to get passwordinfo length
 var passwordLength = function () { 
   var num = window.prompt("How long would you like your password to be? Anywhere from 8 to 128 characters.");
-  if (num < 8 || num > 128) {
-    window.alert("Please choose an appropriate length password");
-    generatePassword();
+  var checkIfNum = parseInt(num);
+  if (num === "" || num === null || num < 8 || num > 128 || !checkIfNum) {
+    alert("Please choose an appropriate length password");
+    passwordLength();
   } else {
-    window.alert("Great! Your password will be " + num + " characters long. Let's pick characters to add to your password.");
+    alert("Great! Your password will be " + num + " characters long. Let's pick characters to add to your password.");
   } 
   return num;
 } 
